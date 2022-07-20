@@ -1,130 +1,270 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
-    <title>Sentiment Based Product Recommender</title>
-  </head>
-
-  <body>
-    <nav class="navbar fixed-top navbar-dark bg-primary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#"
-          >Sentiment Product Recommender Engine</a
-        >
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarText"
-          aria-controls="navbarText"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- Bootstrap CSS -->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous"
+        />
+        <style>
+            .header{
+                background: rgb(235, 91, 91);
+                height: 100px;
+            }
+            .header_text{
+                color :white;
+                font-size: xx-large;
+                text-align: center;
+                padding-top:20px;
+                text-shadow: 2px 2px  #000000;
+                align-items: center;
+            }
+            .sub_header_text{
+                color :rgb(0, 0, 0);
+                font-weight:normal;
+                font-size: x-large;
+                text-align: center;
+                padding-top:20px;
+                align-items: center;
+            }
+            .add_margin{
+                margin-right: 100px;
+                margin-left: 100px;
+            }
+            .check_border{
+                border: 2px solid red;
+            }
+            .body_div{
+                background: rgb(255, 255, 255);
+                height: 650px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                align-content: center;
+                border-radius: 10px;
+            }
+            .scroll_view_vertical{
+                background: rgb(255, 255, 255);
+                height: 100px;
+                width:500px;
+                display: flex;
+                flex-direction: column;
+                overflow-y: scroll;
+                overflow-x: hidden;
+                align-self:space-evenly	;
+                margin:20px;
+            }
+            .scroll_element_vertical{
+                background: #d8e9f0;
+                /* display: flex; */
+                height: 50px;
+                width:480px;
+                border: 1px solid #3584a5;
+                border-radius: 50px;
+                padding-left: 20px;
+                margin: 2px;
+            }
+            .scroll_element_vertical:hover{
+                background: #4ac5f9;
+            }
+            .scroll_element_vertical:active{
+                background: #4af987;
+            }
+            .text_user{
+                color :white;
+                text-align: center;
+                font-size: medium;
+            }
+            .recommend{
+                background: rgb(0, 179, 255);
+                height: 50px;
+                width:200px;
+                border: 1px solid #3584a5;
+                border-radius: 50px;
+            }
+            .recommend:hover{
+                background: #215f7a;
+            }
+            .recommend:active{
+                background: rgb(255, 255, 255);
+                color :rgb(0, 0, 0);
+                border: 2px solid #000000;
+            }
+            .recommend_text{
+                color :white;
+                font-size: 30px;
+                text-align: center;
+                align-items: center;
+                vertical-align: middle;
+            }
+            .recommend_disp{
+                background-color: #40daf5;
+                padding-left: 50px;
+                margin-top: 30px;
+                font-size: 25px;
+                width: 90%;
+                border-radius: 10px;
+            }
+            .example{
+                width: 90%;
+                justify-content: start;
+                margin: 0px;
+                padding: 0px;
+            }
+            .paragraph{
+                background: #d8e9f0;
+                height: 60px;
+                width: 90%;
+                border-radius: 10px;
+                padding: 10px;
+                margin: 0px;
+                display: flex;
+                flex-direction: column;
+                overflow-y: scroll;
+                overflow-x: hidden;
+                border: 1px solid #3584a5;
+                color: #00000080;
+            }
+            .scroll_view_horizontal{
+                padding: 10px;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                background: #fe5858;
+                height: 400px;
+                width: 90%;
+                border-radius: 10px;
+                overflow-x: scroll;
+                overflow-y: hidden;
+                box-shadow: inset 0 0 10px #000000d5;
+            }
+            .scroll_element{
+                background: #7d236d;
+                height: 350px;
+                width:300px;
+                border-radius: 10px;
+                padding: 10px;
+                margin:10px;
+            }
+            .text{
+                color :rgb(33, 107, 234);
+                text-align: center;
+            }
+            .product_text{
+                margin:10px; 
+                height : 150px; 
+                font-size: 20px; 
+                color: #d6f6f1;
+            }
+            .score_text{
+                margin-top:2px; 
+                font-size: 15px; 
+                color:  #d4151f;
+            }
+            .score_value_text{
+                margin-top: 5px;
+                font-size:70px ; 
+                color: rgb(255, 255, 255);
+                font-weight: bold;
+            }
+            .error{
+                margin-top: 20px;
+                color:#fe5858
+            }
+        </style>
+        <title>Sentiment Based Product Recommendation</title>
+    </head>
+    <body >
+        <div class="header "> 
+            <h1 class="header_text"> Sentiment Based Product Recommendation System </h1>
+        </div>
+        <div class="header " style = 'background: #40daf5; height: 70px;'> 
+            <h1 class="sub_header_text"> Type user name for product recommendation </h1>
+        </div>
+        <div class = 'add_margin'>
+            <div class=" body_div"> 
+                <form style="margin-top : 10px" action="/predict" method="post"> 
+                    <input class="scroll_element_vertical" type="text"
+                    id="userName"
+                    name="userName"
+                    placeholder="Enter user name to search..."></input>
+                    <input type='submit' class = 'recommend recommend_text'  value='submit' />
+                </form>
+                <p class="example">User name examples</p>
+                <div class="paragraph">
+                    '01impala', '02dakota', '02deuce', '0325home', '06stidriver', '08dallas', '12cass12', 
+                    '12gage', '13dani', '13thfaerie', '1421nikki', '143st', '148maine', '1515', '15425shopper',
+                     '170361eggs', '1753', '17roses', '1863philly', '1943', '1950rmm', '1968bear', '1970', 
+                     '1979edes', '1992firebirdgirl', '19bubba67', '19granny', '1awesome1', '1boomer', 
+                     '1buzymom', '1cadet', '1chynna', '1clean1', '1cleaner', '1cocoafan', '1derpet1', 
+                     '1gamer', '1gra', '1happymom', '1healthytot', '1hotmama', '1stcavdivision', '1stgrade', 
+                     '1stlady', '1sungirl', '1vgarcia', '1wildbill2l', '1witch', '2011pink2011', 
+                     '2013bestbuyer', '2014bestbuys', '2015mom', '2016', '2016home', '2016parker10', 
+                     '2062351337', '20crafter16', '210tundra', '2175046722', '25happyshopper', 
+                     '262jennifer', '2689', '295259', '2athome', '2bgreen', '2big', '2busy4u', '2choclabs', 
+                     '2clean4me', '2ds4es14', '2esinapod', '2forhokies', '2go4savings', '2hearts1love', 
+                     '2iceskates', '2shoes', '2sweetdaisies', '2thumbsup', '2total', '30103', '3375509742', 
+                     '370gt', '37f5p', '38redsox', '3babiesat41', '3bear', '3bees', '3boys2turtles5chicks', 
+                     '3card', '3dcav', '3dfan', '3dmoviewatcher', '3dpic', '3kids', '3littlegirls', 
+                     '3ringcircus', '3sawhorsesneeded', '3skyyblue', '4 rooms 1 dog lotsa fur', '4048197640', 
+                     '405april', '4112', '44pam44', '45177ss', '45mindishqueen', '4795181377', '49ersfor6', 
+                     '4bukfam', '4dogmom', '4frugal', '4gis1975', '4katelyn', '4luds', '4parman', '4shop', 
+                     '4stew57', '4th grade teacher', '4theloveofclorox', '4wipes', '500mpl', '50cal', 
+                     '5150seriousshopper5150', '530germkiller', '54867906', '5742870423', '5boysohmy', 
+                     '5kids', '5mcdaniels', '5zenuff', '62deuce', '63lamb', '6623443094', '6787249844', 
+                     '67firebird', '69chopper', '6cockers', '6mex2', '6utefans', '70chp', '714reginald', 
+                     '714rv', '72443', '74corvetteguy', '79captm79', '7autumn5', '7frances7', '7of9', 
+                     '7rick', '80021mom', '80204', '8023', '808wrx', '81t21', '85721747267', '8574178605', 
+                     '85lisa', '8675309', '89c46698305f04e39d57a88a2c5c3ce297787288', '8bithero', '8ellie24',
+                    '8mooshu', '8rob1', '8sk8anddon8', '8thred', '9003058363', '9373weld', '98nd500', 
+                    '99runner', '9thdoctor', '_christenak', 'a hutch', 'a leaf on the family tree', 
+                      'a11mxdup', 'a1s3', 'a77077', 'a786', 'a7xmaddlove', 'aaaa', 'aaam', 'aac06002', 
+                      'aac3', 'aarhus74', 'aaron', 'aaronabigail', 'aaronm', 'aayla', 'ab1015', 'ab86', 
+                      'abacadaba', 'abam', 'abananie', 'abarker1215', 'abashli', 'abaybay', 'abbey', 
+                      'abbey64', 'abbi', 'abbs77', 'abbuyguy', 'abby', 'abby11', 'abby8992', 'abbysmama', 
+                      'abc1245', 'abc3', 'abc4sb206', 'abcd', 'abcdef', 'abcgator', 'abctech', 'abear93', 
+                      'abefroman', 'abel9027', 'abelc', 'abesb', 'abeverly7', 'abf1987', 'abi09', 'abigail32',
+                       'abigail81', 'abihaven', 'abm1976', 'abm27', 'about2bmom', 'abphillips7858', 'abrams',
+                        'abret', 'abrildiez', 'abrinegarwky', 'abruscini', 'abryant', 'abyo', 'ac90', 
+                        'ac94', 'acadia', 'acarrera9461', 'acarrill93', 'acasabel', 'acceber32', 
+                        'accounting m', 'accwiz', 'acd3', 'acdd', 'ace2', 'ace24', 'acegamer', 'acehardware', 
+                        'acehi369ja', 'acellacey', 'acelyn', 'acetolman', 'acf11154', 'achef', 'achick',
+                        'achkosh', 'acidchipmunk', 'acjuarez08', 'ackk', 'acmillion', 'acornnancy', 
+                        'acr2015', 'acs614', 'actias', 'actionaction', 'actiond', 'actionjem', 'activegal', 
+                        'actortj', 'acv4217', 'ada_us_ohpiiy', 'adaizy79', 'adam', 'adam1977', 'adam9976', 
+                        'adams31', 'adamsmom', 'adamsra10', 'adan', 'adanas', 'adapterhdtv', 'adapters', 
+                        'adash75', 'adavidson', 'adawg', 'addie', 'addieb87', 'addmotherhood25', 'adele', 
+                        'adeleforlife', 'adeline', 'adelynsmom', 'adfj21', 'adina', 'adma2', 'admin girl', 
+                        'admin in williamsburg', 'admiralake', 'admirer28', 'adpp', 'adr1ana', 'adr2', 
+                        'adrbeach', 'adrbeach27', 'adrialc', 'adrian17', 'adriana', 'adriana9999'
+                    </div>
+                {% if user_name != null %}
+                <div class = 'recommend_disp'>Recommended Products for <b>{{user_name}}</b></div>
+                <div class = 'scroll_view_horizontal' >
+                    {% for i in range(5)%}
+                    <div class = 'scroll_element' >
+                        <h1 class = 'text score_text' > Product</h1>
+                        <h2 class = 'text product_text' > {{contents[i]}}</h2>
+                        <h1 class = 'text score_text' > Score</h1>
+                        <h1 class = 'text score_value_text'> {{counts[i]}} </h1>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class = 'error'> Please enter user name </p>
+                {% endif %}
+            </div>
+        </div>
+    </body>
+    <footer>
+        <!-- Copyright -->
+    <div class="text-center p-3 bg-light">
+        Capestone project created by Ashish Panigrahi, jul 2022
       </div>
-    </nav>
-
-    <div class="container" style="margin-top: 70px">
-      <form action="/predict" method="post">
-        <div class="row vstack gap-3">
-          <div class="row">
-            <div class="col-sm-5">
-              <input
-                class="form-control"
-                type="text"
-                id="userName"
-                name="userName"
-                placeholder="Enter UserName to search..."
-              />
-              <p>
-                <small>Enter usernames like "02dakota", "123charlie", "08dallas" etc. </small>
-              </p>
-            </div>
-            <div class="col-sm-2">
-              <input type="submit" class="btn btn-primary" value="Submit" />
-            </div>
-          </div>
-          <div class="row">
-            {% if row_data %}
-            <table class="table table-striped table-hover">
-              <caption>
-                List of Top 5 Recommended Products
-              </caption>
-              <thead>
-                <tr>
-                  <td>Product Name</td>
-                  <td>Brand</td>
-                  <td>Manufacturer</td>
-                  <td>Recommedation %</td>
-                </tr>
-              </thead>
-              <tbody>
-                {% for row in row_data %}
-                <tr>
-                  {% for col, row_ in zip(column_names, row) %}
-                  <td>{{row_}}</td>
-                  {% endfor %}
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-            {% endif %}
-          </div>
-          <div class="row">
-            {% if message%}
-            <div class="alert alert-danger" role="alert">{{message}}</div>
-            {% endif %}
-          </div>
-        </div>
-      </form>
-
-      <form method="post" action="/predictSentiment">
-        <div class="row vstack gap-3">
-          <div class="row">
-            <label for="reviewText" class="form-label"
-              >Enter your Review here</label
-            >
-            <textarea
-              class="form-control"
-              name="reviewText"
-              rows="3"
-              id="reviewText"
-            ></textarea>
-          </div>
-          <div class="row">
-            <div class="col align-self-end">
-              <input
-                type="submit"
-                class="btn btn-primary float-end"
-                value="Predict Sentiment"
-              />
-            </div>
-          </div>
-          <div class="row">
-            {% if sentiment == 1%}
-            <div class="alert alert-success" role="alert">
-              Entered Review Text is predicted to be Positive
-            </div>
-            {% elif sentiment == 0%}
-            <div class="alert alert-danger" role="alert">
-              Entered Review Text is predicted to be Negative
-            </div>
-            {% endif %}
-          </div>
-        </div>
-      </form>
-    </div>
-  </body>
-  <footer class="bg-light text-center text-lg-start fixed-bottom">  
-  </footer>
+      <!-- Copyright -->
+    </footer>
 </html>
